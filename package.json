@@ -1,0 +1,17 @@
+{
+  "name": "socks5-address-field",
+  "version": "0.1.0",
+  "description": "Serializes and parses the variable-length address field used in SOCKS5 request and reply packets.",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": "./src/index.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "dependencies": {}
+}
