@@ -37,3 +37,10 @@ Every SOCKS5 implementation ends up re-implementing the same three-branch addres
 IPv6 text is parsed with full `::` compression support, but the *serializer emits the uncompressed 16-byte form*, and the parser emits the corresponding non-compressed text (`2001:db8:0:0:0:0:0:1`, not `2001:db8::1`). If your code compares the original text to the round-tripped text, it will not match even though the bytes are identical. Compare bytes, or compare against the canonical non-compressed form.
 
 Domain names are decoded as UTF-8 with replacement (`U+FFFD`) rather than rejected, so a packet containing non-UTF-8 octets parses without throwing. Callers that need byte-exact domain handling should read the raw bytes from the input buffer rather than relying on the decoded `address` string.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
